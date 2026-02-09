@@ -1,0 +1,5 @@
+JNI_OnLoad
+JNI_OnUnload
+Java_com_nodes_jni_nodesJNI_initialize
+Java_com_nodes_jni_nodesJNI_newtonRhapsonSolveAirResistance
+c_doThing
