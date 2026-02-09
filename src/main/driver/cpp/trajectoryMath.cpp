@@ -198,14 +198,9 @@ TrajectorySolution newtonRhapsonSolveAirResistance(
                     shooterAltitude)
                 - glm::vec2(targetPos.x, targetPos.y);
         if (count % 1 == 0) {
-        // System.out.println("\niteration: " + (count + 1) + "  f_x:" + dist(f_x) + "\n");
-        // System.out.println(x);
-        // System.out.println("\n");
-        // System.out.println(f_x);
-        // System.out.println("\n");
-            cout << "\niteration: " << (count + 1) << "  f_x:" << sqrt(f_x.x * f_x.x + f_x.y * f_x.y) << "\n";
-            cout << x.x << " " << x.y << "\n";
-            cout << f_x.x << " " << f_x.y << "\n";
+            // cout << "\niteration: " << (count + 1) << "  f_x:" << sqrt(f_x.x * f_x.x + f_x.y * f_x.y) << "\n";
+            // cout << x.x << " " << x.y << "\n";
+            // cout << f_x.x << " " << f_x.y << "\n";
         }
         // if (dist(f_x) < tolerance) return TrajectorySolution(x);
         glm::mat2 J =
@@ -295,8 +290,8 @@ double solveQuartic(double a, double b, double c, double d, double e) {
     // 3. Compute eigenvalues (these are the roots)
     Eigen::EigenSolver<Eigen::Matrix4d> solver(companion);
     
-    std::cout << "The roots of the quartic polynomial are:\n" 
-              << solver.eigenvalues() << std::endl;
+    // std::cout << "The roots of the quartic polynomial are:\n" 
+    //           << solver.eigenvalues() << std::endl;
               auto roots = solver.eigenvalues();
 
     double maxRealRoot = 0;
@@ -314,7 +309,7 @@ double solveQuartic(double a, double b, double c, double d, double e) {
         }
     }
     // if (foundReal) {
-        std::cout << "Highest real root: " << maxRealRoot << std::endl;
+        // std::cout << "Highest real root: " << maxRealRoot << std::endl;
     // } else {
     //     std::cout << "No real roots found." << std::endl;
     // }

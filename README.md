@@ -1,6 +1,7 @@
-# WPILib Vendor Template
+# NODES
 
-This is the base WPILib vendor template for 2025.
+Nonlinear Ordinary Differential Equations Solver
+(solving trajectories for quadratic drag projectiles)
 
 ## Layout
 
