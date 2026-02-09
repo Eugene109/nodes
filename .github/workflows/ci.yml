@@ -75,6 +75,8 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           architecture: ${{ matrix.architecture }}
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build -Pbuildalldesktop
       - uses: actions/upload-artifact@v4
