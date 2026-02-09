@@ -39,6 +39,8 @@ jobs:
       - name: Fetch all history and metadata
         run: |
           git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew build ${{ matrix.build-options }}
       - uses: actions/upload-artifact@v4
