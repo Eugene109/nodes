@@ -47,3 +47,8 @@ JNIEXPORT jobject JNICALL Java_com_nodes_jni_nodesJNI_newtonRhapsonSolveAirResis
     env->SetDoubleField(resultObject, env->GetFieldID(classObj, "azimuth", "D"), solution.azimuth);
   return resultObject;
 }
+JNIEXPORT jdouble JNICALL Java_com_nodes_jni_nodesJNI_minDistTrajectory
+  (JNIEnv *, jclass, jdouble shooterVel, jdouble azimuth, jdouble v_x, jdouble v_y, jdouble targetX, jdouble targetY, jdouble targetZ, jdouble shooterAltitude) {
+    double minDist = glm::distance(f_airResistance_RK4(glm::vec2(shooterVel, azimuth), v_x, v_y, targetZ, shooterAltitude), glm::vec2(targetX, targetY));
+    return minDist;
+}

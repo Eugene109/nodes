@@ -77,4 +77,13 @@ public class nodesJNI {
       double targetY,
       double targetZ,
       double shooterAltitude);
+  public static native double minDistTrajectory(
+      double shooterVel,
+      double azimuth,
+      double v_x,
+      double v_y,
+      double targetX,
+      double targetY,
+      double targetZ,
+      double shooterAltitude);
 }
