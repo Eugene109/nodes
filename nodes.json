@@ -5,9 +5,9 @@
     "frcYear": "2026",
     "uuid": "8e473515-0fd7-4da2-a3cb-64a85fe2f0fa",
     "mavenUrls": [
-        "file:///C:/Users/920257/Austria/nodes/build/repos/releases"
+        "https://maven.pkg.github.com/Eugene109/nodes"
     ],
-    "jsonUrl": "www.example.com",
+    "jsonUrl": "https://github.com/Eugene109/nodes/releases/latest/download/nodes.json",
     "javaDependencies": [
         {
             "groupId": "${groupId}",

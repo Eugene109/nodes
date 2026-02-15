@@ -180,21 +180,28 @@ build.dependsOn vendordepJsonZip
 
 libraryBuild.dependsOn build
 
-def releasesRepoUrl = "$buildDir/repos/releases"
+// def releasesRepoUrl = "$buildDir/repos/releases"
 
 publishing {
     repositories {
         maven {
-            url = releasesRepoUrl
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Eugene109/nodes")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
 
-task cleanReleaseRepo(type: Delete) {
-    delete releasesRepoUrl
-}
 
-tasks.matching {it != cleanReleaseRepo}.all {it.dependsOn cleanReleaseRepo}
+// Delete local repo task removed as we are publishing to GitHub Packages
+// task cleanReleaseRepo(type: Delete) {
+//    delete releasesRepoUrl
+// }
+// tasks.matching {it != cleanReleaseRepo}.all {it.dependsOn cleanReleaseRepo}
+
 
 model {
     publishing {
