@@ -52,3 +52,8 @@ JNIEXPORT jdouble JNICALL Java_com_nodes_jni_nodesJNI_minDistTrajectory
     double minDist = glm::distance(f_airResistance_RK4(glm::vec2(shooterVel, azimuth), v_x, v_y, targetZ, shooterAltitude), glm::vec2(targetX, targetY));
     return minDist;
 }
+
+JNIEXPORT void JNICALL Java_com_nodes_jni_nodesJNI_configureParameters
+  (JNIEnv *, jclass, jdouble Cd_new, jdouble A_new, jdouble m_new, jdouble rho_new) {
+    configureParameters(Cd_new, A_new, m_new, rho_new);
+}

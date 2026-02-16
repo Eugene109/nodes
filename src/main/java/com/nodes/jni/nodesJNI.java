@@ -86,4 +86,6 @@ public class nodesJNI {
       double targetY,
       double targetZ,
       double shooterAltitude);
+
+  public static native void configureParameters(double Cd_new, double A_new, double m_new, double rho_new);
 }
