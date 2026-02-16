@@ -17,15 +17,31 @@ glm::mat2 calcJacobian(glm::vec2 in, double v_x, double v_y, double z, double al
     return J;
 }
 
-double dragAccel(double vMag) {
-    double Cd = 0.47; // Drag coefficient for a sphere / fuel
+double Cd = 0.47; // Drag coefficient for a sphere / fuel
+double A =
+    0.15 * 0.15 / 4 * 3.14159265358979323846; // Cross-sectional area in m^2 of a Fuel piece
+double rho = 1.225; // Air density in kg/m^3
+double m = 0.227; // Mass in kg of a Fuel piece ~0.203-0.227kg
+void configureParameters(double Cd_new, double A_new, double m_new, double rho_new){
+    Cd = Cd_new;
+    A = A_new;
+    m = m_new;
+    rho = rho_new;
+}
+void configureParametersLunite(double rho_new = 1.225) {
     Cd = 0.75; // Drag coefficient for a lunite
-    double A =
-        0.15 * 0.15 / 4 * 3.14159265358979323846; // Cross-sectional area in m^2 of a Fuel piece
     A = 0.0072; // Approximate cross-sectional area of a lunite
-    double rho = 1.225; // Air density in kg/m^3
-    double m = 0.23; // Mass in kg of a Fuel piece
     m = 0.069; // Mass in kg of a lunite
+    rho = rho_new;
+}
+void configureParametersFuel(double rho_new = 1.225) {
+    Cd = 0.47; // Drag coefficient for a sphere / fuel
+    A = 0.15 * 0.15 / 4 * 3.14159265358979323846; // Cross-sectional area in m^2 of a Fuel piece
+    m = 0.227; // Mass in kg of a Fuel piece ~0.203-0.227kg
+    rho = rho_new;
+}
+
+double dragAccel(double vMag) {
     double F_d = 0.5 * Cd * rho * A * vMag * vMag; // Drag force
     double a_d = F_d / m; // Acceleration due to drag
     return a_d;

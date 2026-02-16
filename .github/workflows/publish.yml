@@ -134,6 +134,12 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Find vendordep JSON
+        id: find-json
+        run: |
+          JSON_PATH=$(find ~/releases -name "nodes.json" | head -1)
+          echo "json_path=$JSON_PATH" >> $GITHUB_OUTPUT
+
       - uses: actions/upload-artifact@v4
         with:
           name: Maven
@@ -143,6 +149,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          files: build/repos/nodes.json
+          files: ${{ steps.find-json.outputs.json_path }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

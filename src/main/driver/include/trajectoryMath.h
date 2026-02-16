@@ -30,3 +30,5 @@ TrajectorySolution calcFiringSolution(
     double shooterAltitude);
 glm::vec2 f_airResistance_RK4(
     glm::vec2 in, double v_x, double v_y, double z, double alpha);
+
+void configureParameters(double Cd_new, double A_new, double m_new, double rho_new);
