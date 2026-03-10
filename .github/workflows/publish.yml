@@ -124,8 +124,8 @@ jobs:
         working-directory: combiner
         env:
           MAVEN_PUBLISH_URL: 'https://repo.repsy.io/eugene109/nodes'
-          MAVEN_PUBLISH_USERNAME: ${{ secrets.PUB_USERNAME }}
-          MAVEN_PUBLISH_PASSWORD: ${{ secrets.PUB_PASSWORD }}
+          MAVEN_PUBLISH_USERNAME: 'eugene109'
+          MAVEN_PUBLISH_PASSWORD: ${{ secrets.REPSY_PASSWORD }}
       - uses: actions/upload-artifact@v4
         with:
           name: Maven
