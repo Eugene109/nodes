@@ -4,6 +4,9 @@
 #include <iostream>
 #include <limits>
 
+
+namespace nodes{
+
 #define g 9.81 // Gravity in m/s^2
 
 glm::mat2 calcJacobian(glm::vec2 in, double v_x, double v_y, double z, double alpha) {
@@ -331,3 +334,5 @@ double solveQuartic(double a, double b, double c, double d, double e) {
     // }
     return maxRealRoot;
 }
+
+} // namespace nodes

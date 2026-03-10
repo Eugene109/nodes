@@ -27,9 +27,9 @@ JNIEXPORT jint JNICALL Java_com_nodes_jni_nodesJNI_initialize
 JNIEXPORT jobject JNICALL Java_com_nodes_jni_nodesJNI_newtonRhapsonSolveAirResistance
   (JNIEnv *env, jclass, jdouble v_x, jdouble v_y, jdouble targetX, jdouble targetY, jdouble targetZ, jdouble shooterAltitude) {
     glm::vec3 targetPos = glm::vec3(targetX, targetY, targetZ);
-    TrajectorySolution guessSolution = calcFiringSolution(v_x, v_y, targetPos, shooterAltitude);
+    nodes::TrajectorySolution guessSolution = nodes::calcFiringSolution(v_x, v_y, targetPos, shooterAltitude);
     // auto guessSolution1 = TrajectorySolution(glm::vec2(8, 3.14159/3.0));
-    TrajectorySolution solution = newtonRhapsonSolveAirResistance(v_x, v_y, targetPos, shooterAltitude, guessSolution);
+    nodes::TrajectorySolution solution = nodes::newtonRhapsonSolveAirResistance(v_x, v_y, targetPos, shooterAltitude, guessSolution);
 
     jclass classObj = env->FindClass("com/nodes/jni/nodesJNI$TrajectorySolution");
     if (classObj == NULL) {
@@ -49,11 +49,11 @@ JNIEXPORT jobject JNICALL Java_com_nodes_jni_nodesJNI_newtonRhapsonSolveAirResis
 }
 JNIEXPORT jdouble JNICALL Java_com_nodes_jni_nodesJNI_minDistTrajectory
   (JNIEnv *, jclass, jdouble shooterVel, jdouble azimuth, jdouble v_x, jdouble v_y, jdouble targetX, jdouble targetY, jdouble targetZ, jdouble shooterAltitude) {
-    double minDist = glm::distance(f_airResistance_RK4(glm::vec2(shooterVel, azimuth), v_x, v_y, targetZ, shooterAltitude), glm::vec2(targetX, targetY));
+    double minDist = glm::distance(nodes::f_airResistance_RK4(glm::vec2(shooterVel, azimuth), v_x, v_y, targetZ, shooterAltitude), glm::vec2(targetX, targetY));
     return minDist;
 }
 
 JNIEXPORT void JNICALL Java_com_nodes_jni_nodesJNI_configureParameters
   (JNIEnv *, jclass, jdouble Cd_new, jdouble A_new, jdouble m_new, jdouble rho_new) {
-    configureParameters(Cd_new, A_new, m_new, rho_new);
+    nodes::configureParameters(Cd_new, A_new, m_new, rho_new);
 }
