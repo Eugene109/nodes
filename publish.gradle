@@ -185,11 +185,11 @@ libraryBuild.dependsOn build
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Eugene109/nodes")
+            name = "Repsy"
+            url = uri("https://repo.repsy.io/mvn/eugene109/nodes")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = "eugene109"
+                password = System.getenv("REPSY_PASSWORD")
             }
         }
     }
