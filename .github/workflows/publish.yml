@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   validation:
@@ -48,6 +49,9 @@ jobs:
           git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+      - name: Install Gradle Toolchain
+        if: ${{ matrix.artifact-name == 'Linux' }}
+        run: ./gradlew installRoboRioToolchain
       - name: Build with Gradle
         run: ./gradlew build ${{ matrix.build-options }}
       - uses: actions/upload-artifact@v4
@@ -84,6 +88,8 @@ jobs:
           architecture: ${{ matrix.architecture }}
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+      - name: Install WPILib Toolchain
+        run: ./gradlew installRoboRioToolchain
       - name: Build with Gradle
         run: ./gradlew build -Pbuildalldesktop
       - uses: actions/upload-artifact@v4
@@ -91,14 +97,15 @@ jobs:
           name: ${{ matrix.artifact-name }}
           path: build/allOutputs
 
+
   combine:
     name: Combine
-    needs: [build-docker, build-host]
+    needs: [build-docker, build-host, format-check]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: wpilibsuite/build-tools
+          repository: photonvision/build-tools
       - uses: actions/download-artifact@v4
         with:
           path: combiner/products/build/allOutputs
@@ -108,36 +115,17 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-      
-      - name: Configure Publishing
+      - name: Combine (Release)
+        if: |
+          github.repository_owner == 'Eugene109' &&
+          startsWith(github.ref, 'refs/tags/v')  
         run: |
-          cat <<EOF >> combiner/build.gradle
-          publishing {
-              repositories {
-                  maven {
-                      name = "Repsy"
-                      url = uri("https://repo.repsy.io/mvn/eugene109/nodes")
-                      credentials {
-                          username = "eugene109"
-                          password = System.getenv("REPSY_PASSWORD")
-                      }
-                  }
-              }
-          }
-          EOF
-
-      - name: Publish to Repsy
-        run: ./gradlew publish -Pthirdparty
+          ./gradlew publish -Pthirdparty
         working-directory: combiner
         env:
-          REPSY_PASSWORD: ${{ secrets.REPSY_PASSWORD }}
-
-      - name: Find vendordep JSON
-        id: find-json
-        run: |
-          JSON_PATH=$(find ~/releases -name "nodes.json" | head -1)
-          echo "json_path=$JSON_PATH" >> $GITHUB_OUTPUT
-
+          MAVEN_PUBLISH_URL: 'https://repo.repsy.io/eugene109/nodes'
+          MAVEN_PUBLISH_USERNAME: ${{ secrets.PUB_USERNAME }}
+          MAVEN_PUBLISH_PASSWORD: ${{ secrets.PUB_PASSWORD }}
       - uses: actions/upload-artifact@v4
         with:
           name: Maven
