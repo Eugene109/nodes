@@ -100,7 +100,7 @@ jobs:
 
   combine:
     name: Combine
-    needs: [build-docker, build-host, format-check]
+    needs: [build-docker, build-host]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
