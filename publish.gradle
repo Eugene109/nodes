@@ -186,9 +186,9 @@ publishing {
     repositories {
         maven {
             name = "Repsy"
-            url = uri("https://repo.repsy.io/mvn/eugene109/nodes")
+            url = uri("https://repo.repsy.io/user34861816/nodes")
             credentials {
-                username = "eugene109"
+                username = "user34861816"
                 password = System.getenv("REPSY_PASSWORD")
             }
         }
