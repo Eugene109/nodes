@@ -123,8 +123,8 @@ jobs:
           ./gradlew publish -Pthirdparty
         working-directory: combiner
         env:
-          MAVEN_PUBLISH_URL: 'https://repo.repsy.io/eugene109/nodes'
-          MAVEN_PUBLISH_USERNAME: 'eugene109'
+          MAVEN_PUBLISH_URL: 'https://repo.repsy.io/user34861816/nodes'
+          MAVEN_PUBLISH_USERNAME: 'user34861816'
           MAVEN_PUBLISH_PASSWORD: ${{ secrets.REPSY_PASSWORD }}
       - uses: actions/upload-artifact@v4
         with:
